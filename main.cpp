@@ -36,7 +36,7 @@ struct smart_array {
             throw my_exception();
         }
     }
-    void operator = (const smart_array &a) {
+    smart_array& operator = (const smart_array &a) {
         this->m_size = a.m_size;
         this->m_max_size = a.m_max_size;
 
@@ -46,6 +46,8 @@ struct smart_array {
         for (int i = 0; i < m_size; ++i) {
             m_array[i] = a.m_array[i];
         }
+
+        return *this;
     }
 };
 
@@ -61,6 +63,8 @@ int main() {
         new_array.add_element(34);
 
         arr = new_array;
+
+        std::cout << arr.get_element(0) << std::endl;
     }
     catch (const std::exception& ex) {
         std::cout << ex.what() << std::endl;
